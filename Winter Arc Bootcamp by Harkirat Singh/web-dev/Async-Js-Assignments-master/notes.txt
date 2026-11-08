@@ -1,0 +1,9 @@
+1. Date.now() :  
+- use this to get current time
+- it can be used to create clock , sleep operation using start end timer
+
+2. Map()
+- Map stores each unique key and its value.
+
+3. Array.from()
+- converts the map entries into the required array of objects.
