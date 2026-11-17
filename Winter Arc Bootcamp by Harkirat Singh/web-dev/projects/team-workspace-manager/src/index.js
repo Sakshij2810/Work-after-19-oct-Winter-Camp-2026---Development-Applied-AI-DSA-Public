@@ -28,7 +28,7 @@ app.use((error, req, res, next) => {
   if (res.headersSent) return next(error);
 
   return res.status(error.status || 500).json({
-    message: error.status ? error.message : "Internal server error"
+    message: error.status ? error.message : "Internal server error",
   });
 });
 

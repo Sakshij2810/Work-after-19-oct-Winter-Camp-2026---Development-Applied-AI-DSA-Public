@@ -10,50 +10,35 @@ public class Classroom {
         FastReader sc = new FastReader();
 
         int n = sc.nextInt();
-        int k = sc.nextInt();
 
-        int stalls[] = new int[n];
+        int arr[] = new int[n];
 
         for (int i = 0; i < n; i++) {
-            stalls[i] = sc.nextInt();
+            arr[i] = sc.nextInt();
         }
 
-        // ---------- Optimised O(n.log n + n log(max position - min position))
+        // ---------- Optimised force TC: O(n) | SC: O(n)
+        int l = 0;
+        int maxStreak = 0;
 
-        Arrays.sort(stalls);
+        HashSet<Integer> set = new HashSet<>();
 
-        long l = 0; // sir asked to keep this 1: but test cases fails if its 1, so for now added 0
-        long r = (long) stalls[n - 1] - stalls[0];
+        for (int r = 0; r < n; r++) {
 
-        long ans = -1;
-
-        while (l <= r) {
-            long mid = l + (r - l) / 2;
-
-            if (isPossible(mid, k, stalls)) {
-                ans = mid;
-                l = mid + 1;
-            } else {
-                r = mid - 1;
+            // 1. Remove elements until duplicate disappears
+            while (set.contains(arr[r])) {
+                set.remove(arr[l]);
+                l++;
             }
+
+            // 2. include arr[r]
+            set.add(arr[r]);
+
+            // 3. Update maximum clean streak
+            maxStreak = Math.max(maxStreak, r - l + 1); // r - l + 1 give curr window size, including both l and r
         }
 
-        System.out.println(ans);
-
-    }
-
-    public static boolean isPossible(long gap, int cows, int stalls[]) {
-        long cowsPlaced = 1;
-        long prev = stalls[0]; // at this position 1st cow is placed
-
-        for (int i = 1; i < stalls.length; i++) {
-            if ((long) stalls[i] - prev >= gap) {
-                cowsPlaced++;
-                prev = stalls[i];
-            }
-        }
-
-        return cowsPlaced >= cows;
+        System.out.println(maxStreak);
     }
 
     // ------------------------ Fast I/O for taking input ------------------------
