@@ -10,35 +10,48 @@ public class Classroom {
         FastReader sc = new FastReader();
 
         int n = sc.nextInt();
+        int k = sc.nextInt();
 
-        int arr[] = new int[n];
+        // ------------- output O(k^n + n . p) --------------
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        ArrayList<Integer> curr = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
+        printAllWayOfClimbStairs(0, n, k, curr, ans);
 
-        // ---------- Optimised force TC: O(n) | SC: O(n)
-        int l = 0;
-        int maxStreak = 0;
+        // Print paths in the required format
+        for (int i = 0; i < ans.size(); i++) {
+            ArrayList<Integer> path = ans.get(i);
 
-        HashSet<Integer> set = new HashSet<>();
-
-        for (int r = 0; r < n; r++) {
-
-            // 1. Remove elements until duplicate disappears
-            while (set.contains(arr[r])) {
-                set.remove(arr[l]);
-                l++;
+            for (int j = 0; j < path.size(); j++) {
+                if (j > 0) {
+                    System.out.print(" ");
+                }
+                System.out.print(path.get(j));
             }
 
-            // 2. include arr[r]
-            set.add(arr[r]);
+            System.out.println();
+        }
+    }
 
-            // 3. Update maximum clean streak
-            maxStreak = Math.max(maxStreak, r - l + 1); // r - l + 1 give curr window size, including both l and r
+    public static void printAllWayOfClimbStairs(int pos, int n, int k, ArrayList<Integer> curr,
+            ArrayList<ArrayList<Integer>> ans) {
+
+        // base cases
+        if (pos == n) {
+            ans.add(new ArrayList<>(curr));
+            return;
+        }
+        if (pos > n) {
+            return;
         }
 
-        System.out.println(maxStreak);
+        // loop k times
+        for (int jump = 1; jump <= k; jump++) {
+            curr.add(jump);
+            printAllWayOfClimbStairs(pos + jump, n, k, curr, ans);
+            curr.remove(curr.size() - 1);
+        }
+
     }
 
     // ------------------------ Fast I/O for taking input ------------------------
