@@ -10,27 +10,24 @@ public class Classroom {
         FastReader sc = new FastReader();
 
         int n = sc.nextInt();
-        int k = sc.nextInt();
+
+        int arr[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
 
         // ------------- output O(k^n + n . p) --------------
-        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
-        ArrayList<Integer> curr = new ArrayList<>();
+        printIncreasing(n, arr);
+    }
 
-        printAllWayOfClimbStairs(0, n, k, curr, ans);
+    public static void printIncreasing(int n, int arr[]) {
 
-        // Print paths in the required format
-        for (int i = 0; i < ans.size(); i++) {
-            ArrayList<Integer> path = ans.get(i);
-
-            for (int j = 0; j < path.size(); j++) {
-                if (j > 0) {
-                    System.out.print(" ");
-                }
-                System.out.print(path.get(j));
-            }
-
-            System.out.println();
+        if (n == 0) {
+            return;
         }
+
+        printIncreasing(n - 1, arr);
+        System.out.println(n);
     }
 
     public static void printAllWayOfClimbStairs(int pos, int n, int k, ArrayList<Integer> curr,

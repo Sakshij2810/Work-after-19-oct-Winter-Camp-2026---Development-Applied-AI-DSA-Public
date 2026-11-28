@@ -1,0 +1,36 @@
+1. stage: call callLLM 
+2. stage: stream output
+3. stage: tool calling without stream
+4. stage: tool calling with stream
+5. stage: stream + tool calling + agent loop
+6. stage: stream + tool calling + agent loop + sub-agent
+7. stage: stream + tool calling + agent loop + 4 sub-agent hierarcy
+8. stage: stream + tool calling + agent loop + 4 sub-agent hierarcy + context compaction
+9. stage: stream + tool calling + agent loop + 4 sub-agent hierarcy + context compaction + context summarization
+
+
+
+
+Your architecture versus the documented pattern
+
+1. Send request
+-> callLLM.ts
+
+2. Receive assistant response
+-> mainAgentLoop.ts
+
+3. Append assistant tool-call message
+-> messages.push(choice.message)
+
+4. Execute local tool
+-> executor.ts → bash.ts / writeFile.ts / sub-agent
+
+5. Append tool response
+-> getToolResponse() with matching tool_call_id
+
+6. Repeat until final answer
+-> while loop in mainAgentLoop.ts
+
+
+
+command to check lint errors: "bunx tsc --noEmit"
