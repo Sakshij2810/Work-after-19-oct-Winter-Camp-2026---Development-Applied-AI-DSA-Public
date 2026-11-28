@@ -1,10 +1,10 @@
-1. stage: call callLLM 
-2. stage: stream output
-3. stage: tool calling without stream
-4. stage: tool calling with stream
-5. stage: stream + tool calling + agent loop
-6. stage: stream + tool calling + agent loop + sub-agent
-7. stage: stream + tool calling + agent loop + 4 sub-agent hierarcy
+1. ✅ stage: call callLLM. 
+2. ✅ stage: stream output. 
+3. ✅ stage: tool calling without stream.  
+4. ✅ stage: tool calling with stream. 
+5. ✅ stage: stream + tool calling + agent loop.   
+6. ✅ stage: stream + tool calling + agent loop + sub-agent
+7. ✅ stage: stream + tool calling + agent loop + 4 sub-agent hierarcy
 8. stage: stream + tool calling + agent loop + 4 sub-agent hierarcy + context compaction
 9. stage: stream + tool calling + agent loop + 4 sub-agent hierarcy + context compaction + context summarization
 
